@@ -1,98 +1,173 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Creator Profile - Tip Jar</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <nav class="navbar">
-        <div class="container">
-            <h1 class="logo">🎨 Creator Tip Jar</h1>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="creators.html">Creators</a>
-                <a href="dashboard.html">Dashboard</a>
-                <button id="connectWallet" class="btn-primary">Connect Wallet</button>
-            </div>
+      <div class="container">
+        <h1 class="logo">🎨 Creator Tip Jar</h1>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="creators.html">Creators</a>
+          <a href="supporters.html">Supporters</a>
+          <a href="dashboard.html">Dashboard</a>
+          <button id="connectWallet" class="btn-primary">Connect Wallet</button>
         </div>
+      </div>
     </nav>
 
-    <div class="container profile-container">
-        <div class="profile-header">
-            <img id="creatorAvatar" src="https://via.placeholder.com/150" alt="Creator Avatar" class="avatar">
-            <div class="profile-info">
-                <h2 id="creatorName">Loading...</h2>
-                <p id="creatorCategory" class="category-badge">Artist</p>
-                <p id="creatorBio">Loading bio...</p>
-                <div class="profile-stats">
-                    <div class="stat">
-                        <span class="stat-value" id="totalTips">0</span>
-                        <span class="stat-label">ALGO Received</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-value" id="supporterCount">0</span>
-                        <span class="stat-label">Supporters</span>
-                    </div>
-                </div>
+    <div class="profile-page-wrapper">
+      <!-- Profile Hero Section -->
+      <div class="profile-hero">
+        <div class="profile-hero-bg"></div>
+        <div class="container profile-hero-content">
+          <div class="profile-header-unique">
+            <div class="profile-avatar-container">
+              <img
+                id="creatorAvatar"
+                src="https://via.placeholder.com/150"
+                alt="Creator Avatar"
+                class="avatar-unique"
+              />
+              <div class="avatar-badge" id="avatarBadge">Creator</div>
             </div>
+
+            <div class="profile-info-unique">
+              <h1 id="creatorName" class="profile-name">Loading...</h1>
+              <div class="profile-meta">
+                <span id="creatorCategory" class="category-badge-unique"
+                  >Artist</span
+                >
+                <span id="profileType" class="profile-type-badge"
+                  >Creator Profile</span
+                >
+              </div>
+              <p id="creatorBio" class="profile-bio">Loading bio...</p>
+
+              <div class="profile-stats-unique">
+                <div class="stat-box">
+                  <div class="stat-number" id="totalTips">0</div>
+                  <div class="stat-text">ALGO Received</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-number" id="supporterCount">0</div>
+                  <div class="stat-text">Supporters</div>
+                </div>
+                <div class="stat-box">
+                  <div class="stat-number" id="totalTipsGiven">0</div>
+                  <div class="stat-text">Tips Given</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container profile-container">
+        <div class="profile-content-grid">
+          <!-- Main Tip Section -->
+          <div class="main-tip-section">
+            <div class="tip-card-unique">
+              <div class="tip-card-header">
+                <h2>Send a Tip 💝</h2>
+                <p class="tip-subtitle">Support this creator with ALGO</p>
+              </div>
+
+              <!-- Quick Tip Buttons -->
+              <div class="tip-buttons-grid">
+                <button class="tip-btn-unique" data-amount="1">
+                  <span class="tip-btn-amount">1</span>
+                  <span class="tip-btn-currency">ALGO</span>
+                </button>
+                <button class="tip-btn-unique" data-amount="5">
+                  <span class="tip-btn-amount">5</span>
+                  <span class="tip-btn-currency">ALGO</span>
+                </button>
+                <button class="tip-btn-unique" data-amount="10">
+                  <span class="tip-btn-amount">10</span>
+                  <span class="tip-btn-currency">ALGO</span>
+                </button>
+                <button class="tip-btn-unique" data-amount="25">
+                  <span class="tip-btn-amount">25</span>
+                  <span class="tip-btn-currency">ALGO</span>
+                </button>
+              </div>
+
+              <!-- Custom Amount Section -->
+              <div class="custom-tip-section">
+                <div class="custom-input-group">
+                  <input
+                    type="number"
+                    id="customAmount"
+                    placeholder="Enter custom amount"
+                    min="0.1"
+                    step="0.1"
+                    class="custom-amount-input"
+                  />
+                  <span class="currency-symbol">ALGO</span>
+                </div>
+                <button id="sendCustomTip" class="btn-send-custom">
+                  Send Custom Tip
+                </button>
+              </div>
+
+              <!-- Message Display -->
+              <div id="tipMessage" class="tip-message"></div>
+
+              <div class="tip-info-box">
+                <p>💡 Your tip goes directly to the creator's wallet</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sidebar with Leaderboard and History -->
+          <div class="sidebar-section">
+            <div class="leaderboard-card-unique">
+              <div class="card-header">
+                <h3>🏆 Top Supporters</h3>
+              </div>
+              <div id="leaderboard" class="leaderboard-unique">
+                <!-- Leaderboard loaded dynamically -->
+              </div>
+            </div>
+
+            <div class="tip-history-card-unique">
+              <div class="card-header">
+                <h3>💰 Recent Tips</h3>
+              </div>
+              <div id="tipHistory" class="tip-history-unique">
+                <!-- Tip history loaded dynamically -->
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="profile-content">
-            <div class="portfolio-section">
-                <h3>Portfolio</h3>
-                <div id="portfolioGrid" class="portfolio-grid">
-                    <!-- Portfolio items loaded dynamically -->
-                </div>
-            </div>
+        <!-- Portfolio Section -->
+        <section class="portfolio-section-unique">
+          <h3>📂 Portfolio</h3>
+          <div id="portfolioGrid" class="portfolio-grid-unique">
+            <!-- Portfolio items loaded dynamically -->
+          </div>
+        </section>
 
-            <div class="tip-section">
-                <div class="tip-card">
-                    <h3>Send a Tip 💝</h3>
-                    <p>Support this creator with ALGO</p>
-                    
-                    <div class="tip-amounts">
-                        <button class="tip-btn" data-amount="1">1 ALGO</button>
-                        <button class="tip-btn" data-amount="5">5 ALGO</button>
-                        <button class="tip-btn" data-amount="10">10 ALGO</button>
-                        <button class="tip-btn" data-amount="25">25 ALGO</button>
-                    </div>
-
-                    <div class="custom-amount">
-                        <input type="number" id="customAmount" placeholder="Custom amount" min="0.1" step="0.1">
-                        <button id="sendCustomTip" class="btn-primary">Send Custom</button>
-                    </div>
-
-                    <div id="tipMessage" class="message"></div>
-                </div>
-
-                <div class="leaderboard-card">
-                    <h3>Top Supporters 🏆</h3>
-                    <div id="leaderboard" class="leaderboard">
-                        <!-- Leaderboard loaded dynamically -->
-                    </div>
-                </div>
-
-                <div class="tip-history-card">
-                    <h3>Recent Tips</h3>
-                    <div id="tipHistory" class="tip-history">
-                        <!-- Tip history loaded dynamically -->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="embed-section">
-            <h3>Embed This Tip Button</h3>
-            <p>Copy this code to add a tip button to your website:</p>
+        <!-- Embed Section -->
+        <section class="embed-section-unique">
+          <h3>🔗 Embed Tip Button</h3>
+          <p>Copy this code to add a tip button to your website:</p>
+          <div class="embed-code-container">
             <textarea id="embedCode" readonly class="embed-code"></textarea>
-            <button id="copyEmbed" class="btn-secondary">Copy Code</button>
-        </div>
+            <button id="copyEmbed" class="btn-embed-copy">Copy Code</button>
+          </div>
+        </section>
+      </div>
     </div>
 
     <script src="algorand-sdk.js"></script>
     <script src="app.js"></script>
     <script src="profile.js"></script>
-</body>
+  </body>
 </html>

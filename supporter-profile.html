@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Supporter Profile - Tip Jar</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container">
+        <h1 class="logo">🎨 Creator Tip Jar</h1>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="creators.html">Creators</a>
+          <a href="supporters.html">Supporters</a>
+          <a href="dashboard.html">Dashboard</a>
+          <button id="connectWallet" class="btn-primary">Connect Wallet</button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container profile-container">
+      <div class="profile-header">
+        <img
+          id="supporterAvatar"
+          src="https://via.placeholder.com/150"
+          alt="Supporter Avatar"
+          class="avatar"
+        />
+        <div class="profile-info">
+          <h2 id="supporterName">Loading...</h2>
+          <p id="supporterBadge" class="category-badge">Supporter</p>
+          <p id="supporterBio">Loading bio...</p>
+          <div class="profile-stats">
+            <div class="stat">
+              <span class="stat-value" id="totalTipsSent">0</span>
+              <span class="stat-label">ALGO Sent</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="creatorsCount">0</span>
+              <span class="stat-label">Creators Supported</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="averageTip">0</span>
+              <span class="stat-label">Avg Tip</span>
+            </div>
+          </div>
+          <div id="socialMediaSection" style="margin-top: 1rem; display: none">
+            <a
+              id="socialMediaLink"
+              href="#"
+              target="_blank"
+              class="btn-secondary"
+              >Visit Profile</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-content">
+        <div class="portfolio-section">
+          <h3>Creators Supported 🌟</h3>
+          <div
+            id="creatorsSupported"
+            class="portfolio-grid"
+            style="
+              grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+              gap: 1rem;
+            "
+          >
+            <!-- Creators loaded dynamically -->
+          </div>
+        </div>
+
+        <div class="tip-section">
+          <div class="tip-history-card">
+            <h3>Recent Tips Sent</h3>
+            <div id="tipHistory" class="tip-history">
+              <!-- Tip history loaded dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="algorand-sdk.js"></script>
+    <script src="app.js"></script>
+    <script src="supporter-profile.js"></script>
+  </body>
+</html>

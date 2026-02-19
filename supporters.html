@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Browse Creators - Tip Jar</title>
+    <title>Browse Supporters - Tip Jar</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -21,33 +21,32 @@
     </nav>
 
     <div class="container">
-      <h2>Browse Creators</h2>
+      <h2>Browse Supporters</h2>
+      <p style="color: #666; margin-bottom: 2rem">
+        Discover the amazing supporters backing our creators!
+      </p>
 
       <div class="filters">
-        <select id="categoryFilter">
-          <option value="">All Categories</option>
-          <option value="Artist">Artist</option>
-          <option value="Musician">Musician</option>
-          <option value="Photographer">Photographer</option>
-          <option value="Blogger">Blogger</option>
-          <option value="Videographer">Videographer</option>
-          <option value="Other">Other</option>
-        </select>
+        <input
+          type="text"
+          id="searchFilter"
+          placeholder="Search supporters..."
+        />
 
         <select id="sortFilter">
           <option value="recent">Most Recent</option>
-          <option value="tips">Most Tips</option>
-          <option value="supporters">Most Supporters</option>
+          <option value="tips">Most Tips Sent</option>
+          <option value="creators">Most Creators Supported</option>
         </select>
       </div>
 
-      <div id="creatorsGrid" class="creators-grid">
-        <!-- Creators loaded dynamically -->
+      <div id="supportersGrid" class="creators-grid">
+        <!-- Supporters loaded dynamically -->
       </div>
     </div>
 
     <script src="algorand-sdk.js"></script>
     <script src="app.js"></script>
-    <script src="creators.js"></script>
+    <script src="supporters.js"></script>
   </body>
 </html>
