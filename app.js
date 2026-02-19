@@ -1,22 +1,21 @@
 // Global state
 let connectedWallet = null;
+let walletType = null; // 'pera', 'walletconnect', or 'mock'
 let useRealAlgorand = false;
 
-// Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
     checkAlgorandSDK();
     setupWalletConnection();
     checkWalletConnection();
 });
 
-// Check if real Algorand SDK is available
 function checkAlgorandSDK() {
-    if (typeof algosdk !== 'undefined' && typeof PeraWalletConnect !== 'undefined') {
+    if (typeof algosdk !== 'undefined' && (typeof PeraWalletConnect !== 'undefined' || typeof WalletConnect !== 'undefined')) {
         useRealAlgorand = true;
         window.AlgorandSDK.initAlgorandSDK();
         console.log('✓ Using real Algorand SDK');
     } else {
-        console.log('ℹ Using demo mode (add SDK scripts for real transactions)');
+        console.log('ℹ Using demo mode');
     }
 }
 
@@ -28,34 +27,75 @@ function setupWalletConnection() {
     }
 }
 
-// Connect wallet (real Pera Wallet or mock)
 async function connectWallet() {
+    if (!useRealAlgorand) {
+        const mockWallet = localStorage.getItem('mockWallet') || generateMockWallet();
+        localStorage.setItem('mockWallet', mockWallet);
+        connectedWallet = mockWallet;
+        walletType = 'mock';
+        updateWalletUI();
+        showMessage('Wallet connected (demo mode)', 'success');
+        return;
+    }
+    
+    // Show wallet selection modal
+    const choice = await showWalletModal();
+    
     try {
-        if (useRealAlgorand) {
-            // Real Pera Wallet connection
-            const peraWallet = window.AlgorandSDK.getWallet();
-            const accounts = await peraWallet.connect();
-            connectedWallet = accounts[0];
+        if (choice === 'pera') {
+            connectedWallet = await window.AlgorandSDK.connectPeraWallet();
+            walletType = 'pera';
             
-            // Listen for disconnect
+            const peraWallet = window.AlgorandSDK.getPeraWallet();
             peraWallet.connector?.on('disconnect', () => {
                 connectedWallet = null;
+                walletType = null;
                 updateWalletUI();
             });
-        } else {
-            // Mock wallet for demo
-            const mockWallet = localStorage.getItem('mockWallet');
-            connectedWallet = mockWallet || generateMockWallet();
-            localStorage.setItem('mockWallet', connectedWallet);
+        } else if (choice === 'walletconnect') {
+            connectedWallet = await window.AlgorandSDK.connectWalletConnect();
+            walletType = 'walletconnect';
+            
+            const wc = window.AlgorandSDK.getWalletConnect();
+            wc.on('disconnect', () => {
+                connectedWallet = null;
+                walletType = null;
+                updateWalletUI();
+            });
         }
         
+        localStorage.setItem('walletType', walletType);
+        localStorage.setItem('connectedWallet', connectedWallet);
         updateWalletUI();
-        showMessage('Wallet connected successfully!', 'success');
-        
+        showMessage('Wallet connected!', 'success');
     } catch (error) {
-        console.error('Wallet connection error:', error);
+        console.error('Connection error:', error);
         showMessage('Failed to connect wallet', 'error');
     }
+}
+
+function showWalletModal() {
+    return new Promise((resolve) => {
+        const modal = document.createElement('div');
+        modal.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:1000';
+        modal.innerHTML = `
+            <div style="background:white;padding:2rem;border-radius:12px;max-width:400px;text-align:center">
+                <h3 style="margin-bottom:1rem">Connect Wallet</h3>
+                <button id="peraBtn" style="width:100%;padding:1rem;margin:0.5rem 0;border:2px solid #667eea;border-radius:8px;background:white;cursor:pointer;font-size:1rem">
+                    🔷 Pera Wallet
+                </button>
+                <button id="wcBtn" style="width:100%;padding:1rem;margin:0.5rem 0;border:2px solid #667eea;border-radius:8px;background:white;cursor:pointer;font-size:1rem">
+                    🔗 WalletConnect
+                </button>
+                <button id="cancelBtn" style="width:100%;padding:0.5rem;margin-top:1rem;border:none;background:transparent;cursor:pointer;color:#666">Cancel</button>
+            </div>
+        `;
+        document.body.appendChild(modal);
+        
+        modal.querySelector('#peraBtn').onclick = () => { document.body.removeChild(modal); resolve('pera'); };
+        modal.querySelector('#wcBtn').onclick = () => { document.body.removeChild(modal); resolve('walletconnect'); };
+        modal.querySelector('#cancelBtn').onclick = () => { document.body.removeChild(modal); resolve(null); };
+    });
 }
 
 // Generate mock wallet address for demo
@@ -68,11 +108,12 @@ function generateMockWallet() {
     return address;
 }
 
-// Check if wallet is already connected
 function checkWalletConnection() {
-    const wallet = localStorage.getItem('mockWallet');
-    if (wallet) {
-        connectedWallet = wallet;
+    const savedWallet = localStorage.getItem('connectedWallet');
+    const savedType = localStorage.getItem('walletType');
+    if (savedWallet && savedType) {
+        connectedWallet = savedWallet;
+        walletType = savedType;
         updateWalletUI();
     }
 }
@@ -86,7 +127,6 @@ function updateWalletUI() {
     }
 }
 
-// Send tip transaction (real or mock)
 async function sendTip(recipientAddress, amount) {
     if (!connectedWallet) {
         showMessage('Please connect your wallet first', 'error');
@@ -94,8 +134,7 @@ async function sendTip(recipientAddress, amount) {
     }
     
     try {
-        if (useRealAlgorand) {
-            // Real Algorand transaction
+        if (useRealAlgorand && walletType !== 'mock') {
             const txn = await window.AlgorandSDK.createPaymentTransaction(
                 connectedWallet,
                 recipientAddress,
@@ -103,7 +142,7 @@ async function sendTip(recipientAddress, amount) {
                 'Tip from Creator Tip Jar'
             );
             
-            const txId = await window.AlgorandSDK.signAndSendTransaction(txn);
+            const txId = await window.AlgorandSDK.signAndSendTransaction(txn, walletType);
             
             const transaction = {
                 from: connectedWallet,
@@ -116,7 +155,6 @@ async function sendTip(recipientAddress, amount) {
             storeTip(transaction);
             return transaction;
         } else {
-            // Mock transaction for demo
             const txn = {
                 from: connectedWallet,
                 to: recipientAddress,
@@ -128,7 +166,6 @@ async function sendTip(recipientAddress, amount) {
             storeTip(txn);
             return txn;
         }
-        
     } catch (error) {
         console.error('Transaction error:', error);
         throw error;
