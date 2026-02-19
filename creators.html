@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Creators - Tip Jar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🎨 Creator Tip Jar</h1>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="creators.html">Creators</a>
+                <a href="dashboard.html">Dashboard</a>
+                <button id="connectWallet" class="btn-primary">Connect Wallet</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>Browse Creators</h2>
+        
+        <div class="filters">
+            <select id="categoryFilter">
+                <option value="">All Categories</option>
+                <option value="Artist">Artist</option>
+                <option value="Musician">Musician</option>
+                <option value="Photographer">Photographer</option>
+                <option value="Blogger">Blogger</option>
+                <option value="Videographer">Videographer</option>
+                <option value="Other">Other</option>
+            </select>
+            
+            <select id="sortFilter">
+                <option value="recent">Most Recent</option>
+                <option value="tips">Most Tips</option>
+                <option value="supporters">Most Supporters</option>
+            </select>
+        </div>
+
+        <div id="creatorsGrid" class="creators-grid">
+            <!-- Creators loaded dynamically -->
+        </div>
+    </div>
+
+    <script src="algorand-sdk.js"></script>
+    <script src="app.js"></script>
+    <script src="creators.js"></script>
+</body>
+</html>

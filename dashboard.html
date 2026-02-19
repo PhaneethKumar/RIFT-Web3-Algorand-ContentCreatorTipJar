@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Dashboard - Tip Jar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🎨 Creator Tip Jar</h1>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="creators.html">Creators</a>
+                <a href="dashboard.html">Dashboard</a>
+                <button id="connectWallet" class="btn-primary">Connect Wallet</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container dashboard-container">
+        <h2>Creator Dashboard</h2>
+        
+        <div id="dashboardContent" class="dashboard-content">
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <h3>Total Tips Received</h3>
+                    <p class="stat-large" id="dashTotalTips">0 ALGO</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Supporters</h3>
+                    <p class="stat-large" id="dashSupporters">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Average Tip</h3>
+                    <p class="stat-large" id="dashAvgTip">0 ALGO</p>
+                </div>
+                <div class="stat-card">
+                    <h3>This Month</h3>
+                    <p class="stat-large" id="dashMonthTips">0 ALGO</p>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h3>Your Profile</h3>
+                <div class="profile-preview">
+                    <p><strong>Name:</strong> <span id="dashName">-</span></p>
+                    <p><strong>Category:</strong> <span id="dashCategory">-</span></p>
+                    <p><strong>Wallet:</strong> <span id="dashWallet" class="wallet-address">-</span></p>
+                    <a href="create-profile.html" class="btn-secondary">Edit Profile</a>
+                    <a id="viewProfile" href="#" class="btn-secondary">View Public Profile</a>
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h3>Recent Tips Received</h3>
+                <div id="dashTipHistory" class="tip-history">
+                    <!-- Tips loaded dynamically -->
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h3>Top Supporters</h3>
+                <div id="dashLeaderboard" class="leaderboard">
+                    <!-- Leaderboard loaded dynamically -->
+                </div>
+            </div>
+
+            <div class="dashboard-section">
+                <h3>Embed Widget</h3>
+                <p>Add this code to your website or blog:</p>
+                <textarea id="dashEmbedCode" readonly class="embed-code"></textarea>
+                <button id="copyDashEmbed" class="btn-secondary">Copy Code</button>
+            </div>
+        </div>
+
+        <div id="noProfile" class="no-profile" style="display: none;">
+            <h3>No Creator Profile Found</h3>
+            <p>Connect your wallet and create a profile to start receiving tips!</p>
+            <a href="create-profile.html" class="btn-primary">Create Profile</a>
+        </div>
+    </div>
+
+    <script src="algorand-sdk.js"></script>
+    <script src="app.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

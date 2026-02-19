@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Profile - Tip Jar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🎨 Creator Tip Jar</h1>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="creators.html">Creators</a>
+                <a href="dashboard.html">Dashboard</a>
+                <button id="connectWallet" class="btn-primary">Connect Wallet</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container profile-container">
+        <div class="profile-header">
+            <img id="creatorAvatar" src="https://via.placeholder.com/150" alt="Creator Avatar" class="avatar">
+            <div class="profile-info">
+                <h2 id="creatorName">Loading...</h2>
+                <p id="creatorCategory" class="category-badge">Artist</p>
+                <p id="creatorBio">Loading bio...</p>
+                <div class="profile-stats">
+                    <div class="stat">
+                        <span class="stat-value" id="totalTips">0</span>
+                        <span class="stat-label">ALGO Received</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="supporterCount">0</span>
+                        <span class="stat-label">Supporters</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-content">
+            <div class="portfolio-section">
+                <h3>Portfolio</h3>
+                <div id="portfolioGrid" class="portfolio-grid">
+                    <!-- Portfolio items loaded dynamically -->
+                </div>
+            </div>
+
+            <div class="tip-section">
+                <div class="tip-card">
+                    <h3>Send a Tip 💝</h3>
+                    <p>Support this creator with ALGO</p>
+                    
+                    <div class="tip-amounts">
+                        <button class="tip-btn" data-amount="1">1 ALGO</button>
+                        <button class="tip-btn" data-amount="5">5 ALGO</button>
+                        <button class="tip-btn" data-amount="10">10 ALGO</button>
+                        <button class="tip-btn" data-amount="25">25 ALGO</button>
+                    </div>
+
+                    <div class="custom-amount">
+                        <input type="number" id="customAmount" placeholder="Custom amount" min="0.1" step="0.1">
+                        <button id="sendCustomTip" class="btn-primary">Send Custom</button>
+                    </div>
+
+                    <div id="tipMessage" class="message"></div>
+                </div>
+
+                <div class="leaderboard-card">
+                    <h3>Top Supporters 🏆</h3>
+                    <div id="leaderboard" class="leaderboard">
+                        <!-- Leaderboard loaded dynamically -->
+                    </div>
+                </div>
+
+                <div class="tip-history-card">
+                    <h3>Recent Tips</h3>
+                    <div id="tipHistory" class="tip-history">
+                        <!-- Tip history loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="embed-section">
+            <h3>Embed This Tip Button</h3>
+            <p>Copy this code to add a tip button to your website:</p>
+            <textarea id="embedCode" readonly class="embed-code"></textarea>
+            <button id="copyEmbed" class="btn-secondary">Copy Code</button>
+        </div>
+    </div>
+
+    <script src="algorand-sdk.js"></script>
+    <script src="app.js"></script>
+    <script src="profile.js"></script>
+</body>
+</html>

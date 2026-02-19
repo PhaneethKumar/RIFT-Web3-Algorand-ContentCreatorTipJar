@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Tip Jar - Support Your Favorite Creators</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🎨 Creator Tip Jar</h1>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="creators.html">Creators</a>
+                <a href="dashboard.html">Dashboard</a>
+                <button id="connectWallet" class="btn-primary">Connect Wallet</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h2>Support Student Creators with Crypto Tips</h2>
+            <p>Instant, low-fee payments powered by Algorand blockchain</p>
+            <div class="hero-actions">
+                <a href="creators.html" class="btn-primary">Browse Creators</a>
+                <a href="create-profile.html" class="btn-secondary">Become a Creator</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="icon">💰</span>
+                    <h3>One-Click Tipping</h3>
+                    <p>Send tips instantly with preset amounts</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🏆</span>
+                    <h3>Leaderboards</h3>
+                    <p>See top supporters and trending creators</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">📊</span>
+                    <h3>Creator Dashboard</h3>
+                    <p>Track your earnings and supporters</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🔗</span>
+                    <h3>Embeddable Widget</h3>
+                    <p>Add tip button to any website</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Algorand SDK (optional - for real transactions) -->
+    <script src="https://unpkg.com/algosdk@2.7.0/dist/browser/algosdk.min.js"></script>
+    <script src="https://unpkg.com/@perawallet/connect@1.3.4/dist/index.min.js"></script>
+    
+    <script src="algorand-sdk.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

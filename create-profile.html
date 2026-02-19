@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Profile - Tip Jar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🎨 Creator Tip Jar</h1>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="creators.html">Creators</a>
+                <a href="dashboard.html">Dashboard</a>
+                <button id="connectWallet" class="btn-primary">Connect Wallet</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container form-container">
+        <h2>Create Your Creator Profile</h2>
+        
+        <form id="profileForm" class="profile-form">
+            <div class="form-group">
+                <label for="name">Creator Name *</label>
+                <input type="text" id="name" required placeholder="Your name or artist name">
+            </div>
+
+            <div class="form-group">
+                <label for="category">Category *</label>
+                <select id="category" required>
+                    <option value="">Select a category</option>
+                    <option value="Artist">Artist</option>
+                    <option value="Musician">Musician</option>
+                    <option value="Photographer">Photographer</option>
+                    <option value="Blogger">Blogger</option>
+                    <option value="Videographer">Videographer</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="bio">Bio *</label>
+                <textarea id="bio" required placeholder="Tell supporters about yourself and your work" rows="4"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="avatarUrl">Avatar URL</label>
+                <input type="url" id="avatarUrl" placeholder="https://example.com/avatar.jpg">
+            </div>
+
+            <div class="form-group">
+                <label for="portfolioUrls">Portfolio URLs (one per line)</label>
+                <textarea id="portfolioUrls" placeholder="https://example.com/work1.jpg&#10;https://example.com/work2.jpg" rows="4"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="walletAddress">Algorand Wallet Address *</label>
+                <input type="text" id="walletAddress" required placeholder="Your ALGO wallet address" readonly>
+                <small>Connect your wallet to auto-fill this field</small>
+            </div>
+
+            <div id="formMessage" class="message"></div>
+
+            <button type="submit" class="btn-primary">Create Profile</button>
+        </form>
+    </div>
+
+    <script src="algorand-sdk.js"></script>
+    <script src="app.js"></script>
+    <script src="create-profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        .tip-widget {
+            max-width: 300px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            color: white;
+            text-align: center;
+        }
+        .tip-widget h3 { margin-bottom: 10px; font-size: 18px; }
+        .tip-widget p { margin-bottom: 15px; font-size: 14px; opacity: 0.9; }
+        .tip-amounts { display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap; justify-content: center; }
+        .tip-btn {
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .tip-btn:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
+        .custom-tip { display: flex; gap: 8px; margin-bottom: 10px; }
+        .custom-tip input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 6px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        .custom-tip input::placeholder { color: rgba(255,255,255,0.6); }
+        .send-btn {
+            padding: 10px 20px;
+            background: white;
+            color: #667eea;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+        .send-btn:hover { background: #f0f0f0; }
+        .message { margin-top: 10px; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="tip-widget">
+        <h3>💝 Support Me</h3>
+        <p id="creatorName">Loading...</p>
+        <div class="tip-amounts">
+            <button class="tip-btn" onclick="sendTip(1)">1 ALGO</button>
+            <button class="tip-btn" onclick="sendTip(5)">5 ALGO</button>
+            <button class="tip-btn" onclick="sendTip(10)">10 ALGO</button>
+        </div>
+        <div class="custom-tip">
+            <input type="number" id="customAmount" placeholder="Custom" min="0.1" step="0.1">
+            <button class="tip-btn" onclick="sendCustomTip()">Send</button>
+        </div>
+        <div id="message" class="message"></div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const creatorId = urlParams.get('creator');
+        
+        async function loadCreator() {
+            const creators = JSON.parse(localStorage.getItem('creators') || '[]');
+            const creator = creators.find(c => c.wallet === creatorId);
+            if (creator) {
+                document.getElementById('creatorName').textContent = creator.name;
+            }
+        }
+
+        async function sendTip(amount) {
+            const msg = document.getElementById('message');
+            msg.textContent = `Sending ${amount} ALGO...`;
+            msg.style.color = '#fff';
+            
+            setTimeout(() => {
+                msg.textContent = `✓ Sent ${amount} ALGO!`;
+                setTimeout(() => msg.textContent = '', 3000);
+            }, 1000);
+        }
+
+        function sendCustomTip() {
+            const amount = document.getElementById('customAmount').value;
+            if (amount && amount > 0) {
+                sendTip(amount);
+            }
+        }
+
+        loadCreator();
+    </script>
+</body>
+</html>

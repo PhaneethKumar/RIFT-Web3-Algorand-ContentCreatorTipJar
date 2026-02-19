@@ -1,0 +1,37 @@
+{
+  "name": "content-creator-tip-jar",
+  "version": "1.0.0",
+  "description": "A blockchain-based tipping platform for student content creators built on Algorand",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 8000 -o",
+    "dev": "npx http-server -p 8000"
+  },
+  "keywords": [
+    "algorand",
+    "blockchain",
+    "tipping",
+    "creator-economy",
+    "micropayments",
+    "web3"
+  ],
+  "author": "Student Developer",
+  "license": "MIT",
+  "dependencies": {
+    "algosdk": "^2.7.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "optionalDependencies": {
+    "@perawallet/connect": "^1.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/content-creator-tip-jar"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/content-creator-tip-jar/issues"
+  },
+  "homepage": "https://github.com/yourusername/content-creator-tip-jar#readme"
+}
